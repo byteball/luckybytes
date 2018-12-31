@@ -1,0 +1,38 @@
+{
+  "name": "luckybytes",
+  "description": "LuckyBytes",
+  "author": "pxrunes",
+  "version": "0.1.7",
+  "main": "start.js",
+  "scripts": {
+    "start": "node --use_strict start.js &"
+  },
+  "keywords": [
+    "byteball",
+    "luckybytes",
+    "lottery"
+  ],
+  "license": "MIT",
+  "repository": {
+    "url": "git://github.com/byteball/luckybytes.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/byteball/luckybytes/issues"
+  },
+  "browser": {
+    "request": "browser-request",
+    "secp256k1": "secp256k1/js"
+  },
+  "dependencies": {
+    "superagent": "^3.6.1",
+    "provable": "^0.2.2",
+    "byteballcore": "git+https://github.com/byteball/byteballcore.git",
+    "express": "^4.15.4",
+    "bitcore-lib": "^0.13.14",
+    "bitcore-mnemonic": "~1.0.0",
+    "json-rpc2": "^1.0.2",
+    "bitcore-message": "^1.0.4",
+    "coinkey": "^2.0.0"
+  }
+}

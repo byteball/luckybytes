@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+<meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width">
+    <title>Provable</title>
+    <script src="https://rawgit.com/daywiss/provable/master/dist/provable.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"></script>
+	
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105573136-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments)};
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-105573136-2');
+		</script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div>
+        Here you can verify all games by looking at
+        the outcomes generated here, and comparing them to the outcomes of the original application. 
+        For more information see the <a target="_blank"  href='https://github.com/daywiss/provable'>Provable source code</a>
+      </div>
+	  <input name="hashtext" type="text"  id="text" style="width: 600px;" />
+		<br />
+	 <input onclick="proof()" type="button" value="Proof!" id="button" />
+	 <br />
+	 
+	 <textarea name="prooftext" type="text" value="proof will appear here..." id="text2" style="width: 600px; height: 80px;"></textarea>
+
+    
+    </div>
+  <script>
+
+//see https://github.com/daywiss/provable for full documentation
+
+window.onload = function() {
+	document.getElementById("text").value = getParams("proofid") || "enter proof-hash here...";
+	proof();
+}
+
+  
+
+function proof(){
+  //rehash with public seed if you need to
+  //hash = Provable.rehash(hash,publicSeed)
+  //var text = window.text['hashtext'];
+  var hash = document.getElementById('text').value;
+  
+    var provable = Provable({
+    seed:hash,  //the current hash we are checking
+    count:2,   //the number of previous hashes we want to list with it
+  })
+  //here we get all hashes (20 or hashCount), including seed hash, and reverse them so seed is first.
+  //see docs for full function specification
+  var hashes = provable.hashes(null,null,true,true)
+  
+  
+  document.getElementById('text2').value = 'Your Game-Hash should have been: '+hashes[1]+'\nwith the following outcome:\n'+ calcOutcome(hash); //'Your Game-Hash should be: \n with the following wins: \nBaud: '+Math.trunc(Provable.toFloat(hash, 1, 5, true))+', Byte: '+Math.trunc(Provable.toFloat(hash, 1, 9, true))+', Int: '+Math.trunc(Provable.toFloat(hash, 1, 33, true));';
+  //return 'Baud: '+Math.trunc(Provable.toFloat(hash, 1, 5, true))+', Byte: '+Math.trunc(Provable.toFloat(hash, 1, 9, true))+', Int: '+Math.trunc(Provable.toFloat(hash, 1, 33, true));
+}
+
+function refreshTable(hashes,round){
+    var tableBody = document.getElementById("table");
+    tableBody.innerHTML = "";
+    tableBody.innerHTML = hashes.map(function(hash,index){
+      var result = calcOutcome(hash)
+      return  "<tr><td>"+(round-index)+"</td><td>"+hash+"</td><td>"+result+"</td></tr>";
+    }).join('')
+}
+
+function calcOutcome(hash){
+  //rehash with public seed if you need to
+  //hash = Provable.rehash(hash,publicSeed)
+
+  if (getParams("number")) {
+	var players = getParams("number");
+	return 'For: '+players+' Players the winning number is: '+Math.trunc(Provable.toFloat(hash, 1, Number(players)+1, true));
+  }
+  
+  return 'Baud: '+Math.trunc(Provable.toFloat(hash, 1, 5, true))+', Byte: '+Math.trunc(Provable.toFloat(hash, 1, 9, true))+', Int: '+Math.trunc(Provable.toFloat(hash, 1, 33, true));
+}
+
+//get query parameters from the url
+function getParams(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)")
+  var results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function run(){
+  //this is just some hash you want to verify. It can be passed in as url params
+  var currentHash = getParams('hash') || 'bea3d13023a3f99f16553c6bc9e02f78b09de773d2d226b93afffe16022be98f'
+  //our current round, must be > 0 to be able to do any verification
+  var currentRound = getParams('round') || 1
+  //limit the rounds we are checking to 20
+  var hashCount = Math.min(currentRound,20)
+  
+  //initialize provable
+  var provable = Provable({
+    seed:currentHash,  //the current hash we are checking
+    count:hashCount,   //the number of previous hashes we want to list with it
+  })
+  //here we get all hashes (20 or hashCount), including seed hash, and reverse them so seed is first.
+  //see docs for full function specification
+  var hashes = provable.hashes(null,null,true,true)
+  refreshTable(hashes,currentRound)
+ 
+}
+run()
+</script>
+
+
+</body>
+</html>

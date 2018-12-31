@@ -1,0 +1,437 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:fb="http://ogp.me/ns/fb#">
+	<head>
+		<title>LuckyBytes - The Provably Fair Byteball Lottery</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<meta name="description" content="LuckyBytes - Byteball Bytesを使って遊ぶことができるアプリ内くじです。 参加可能なゲームモードは3種類存在し、さらに毎週Jackpot(大当たり)も選ばれます。当選者は「勝者総取り」の原則に基づき大部分のBytesを獲得するため、プレイヤー数が増えるほどJackpotの賞金は増額します。また、全てのゲームは公平性が証明可能です。各くじには対応するゲームと証明ハッシュが紐付くため、プレイヤーは結果に不正が無いことを検証することが出来ます。"/>
+
+		<meta name="keywords" content="byteball, lottery, provable, fair, gamble, bytes, LuckyBytes" />
+		<meta property="og:image" content="https://lucky.byte-ball.com/promo.PNG"/>
+		<meta property="og:image:width" content="1151"/>
+        <meta property="og:image:height" content="963"/>
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105573136-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments)};
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-105573136-2');
+		</script>
+
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+
+					<header id="header" class="alt">
+
+
+						<h1><i class="icon fa-ticket"></i></h1>
+						<h1>LuckyBytes</h1>
+						<p>公平性が証明可能なByteballくじ</p>
+					</header>
+
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">概要</a></li>
+							<li><a href="#join">参加方法</a></li>
+							<li><a href="#play">オンラインで遊ぶ</a></li>
+							<li><a href="#help">ヘルプ・良くある質問</a></li>
+                            <li><a href="./index.html">English</a></li>
+						</ul>
+					</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+						<!-- Introduction -->
+							<section id="intro" class="main">
+							<h1>概要</h1>
+								<div class="spotlight">
+									<div class="content">
+
+										<h2>Byteballくじ</h2>
+
+										<ul class="actions">
+
+										<p>
+                                        LuckyBytes - Byteball Bytesを使って遊ぶことができるアプリ内くじです。 参加可能なゲームモードは<strong>3種類</strong>存在し、さらに毎週<strong>Jackpot(大当たり)</strong>も選ばれます。当選者は<i>「勝者総取り」</i>の原則に基づき大部分のBytesを獲得するため、プレイヤー数が増えるほどJackpotの賞金は増額します。また、全てのゲームは<strong>公平性が証明可能</strong>です。各くじには対応するゲームと証明ハッシュが紐付くため、プレイヤーは結果に不正が無いことを<a href="https://lucky.byte-ball.com/proof.html">検証</a>することが出来ます。
+                                        </p>
+										</ul>
+									</div>
+
+									<!--<span class="image"><img src="images/pic01.jpg" alt="" /></span>-->
+								</div>
+							<div class="spotlight">
+									<div class="content">
+									<div id="weekly_jackpot">
+											<h2>今週のJackpot</h2>
+
+									<ul class="actions">
+										<p>毎週末に1枚ずつチケットが選ばれます。その仕組みは透明で公平性も証明可能です。</p>
+										<ul class="statistics">
+									<li class="style2"></br>
+
+										<strong><i class="icon fa-trophy"></i>&emsp;今週のJackpot&emsp;<i class="icon fa-trophy"></i></strong> 週末まで:&emsp;<span id="days">0</span> 日&emsp;<span id="hours">0</span> 時間 &emsp; <span id="minutes">0</span> 分<strong>チケット数: <span id="jackpottickets">0</span></strong> 現在の賞金: <strong><span id="jackpot">0</span> MB</strong></p>
+									</li>
+									</ul>
+									</ul>
+									</div>
+
+									<h2>ゲームモード</h2>
+
+										<ul class="actions">
+										<p>現在LuckyBytesでは3種類のゲームをお楽しみいただけます。</p>
+										<ul class="statistics">
+									<li class="style4">
+										<i class="icon fa-users"></i>
+										<strong>luckybaud</strong> <p>わずか4名で行える小口のくじ<strong>4 Players</strong> 賞金 <strong>40 MB</strong></p>
+									</li>
+									<li class="style5">
+										<i class="icon fa-users"></i><i class="icon fa-users"></i>
+										<strong>luckybyte</strong> <p>これぞ王道、元祖のゲームモード<strong>8 Players</strong> 賞金 <strong>80 MB</strong></p>
+									</li>
+									<li class="style1">
+										<i class="icon fa-users"></i><i class="icon fa-users"></i><i class="icon fa-users"></i>
+										<strong>luckyint</strong> <p>挑戦無くしては何も得られない！<strong>32 Players</strong> 賞金 <strong>320 MB</strong></p>
+									</li>
+
+								</ul>
+
+										</ul>
+									</div>
+
+									<!--<span class="image"><img src="images/pic01.jpg" alt="" /></span>-->
+								</div>
+
+							<div class="spotlight">
+									<div class="content">
+
+										<h2>ライブデータ</h2>
+
+
+										<h3>進行中のゲーム:</h2>
+										<p>
+										<strong>luckybaud <span id="game4">(...)</span></strong> - Price: 40 MB &emsp; Slots: <span id="slots4">0</span>/4
+										</br>
+										<strong>luckybyte <span id="game8">(...)</span></strong> - Price: 80 MB &emsp; Slots: <span id="slots8">0</span>/8
+										</br>
+										<strong>luckyint <span id="game32">(...)</span></strong> - Price: 320 MB &emsp; Slots: <span id="slots32">0</span>/32
+										</p>
+										<h3>これまでの記録:</h2>
+										<p>Luckybaud games played: <span id="total4">0</span></strong>
+										</br>
+										Luckybyte games played: <span id="total8">0</span></strong>
+										</br>
+										Luckyint games played: <span id="total32">0</span></strong></p>
+
+										<h3>最新5件のJackpot:</h3>
+										<div class="table-wrapper">
+											<table class="alt">
+												<thead>
+													<tr>
+														<th>ゲーム種別</th>
+														<th>詳細</th>
+														<th>証明</th>
+													</tr>
+												</thead>
+												<tbody id="jackpothistory">
+													<tr>
+														<td>Loading...</td>
+														<td>Loading...</td>
+														<td>Loading...</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+										<h3>最新10件のゲーム:</h3>
+										<div class="table-wrapper">
+											<table class="alt">
+												<thead>
+													<tr>
+														<th>ゲーム種別</th>
+														<th>プレイヤー</th>
+														<th>証明</th>
+													</tr>
+												</thead>
+												<tbody id="gamehistory">
+													<tr>
+														<td>Loading...</td>
+														<td>Loading...</td>
+														<td>Loading...</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+
+									</div>
+
+									<!--<span class="image"><img src="images/pic01.jpg" alt="" /></span>-->
+								</div>
+							</section>
+
+						<!-- First Section -->
+							<section id="join" class="main special">
+
+								<h2>参加方法</h2>
+
+								<ul class="features">
+									<li>
+										<span class="image"><img id="pairingqr" src="QR.png" style="width: 250px;" alt="" /></span>
+										<h3>QRコードをスキャン</h3>
+										<p>モバイルウォレットから: <a href="https://byteball.org/">Byteballアプリ</a>へ移動し、右上方の長方形をタップして下さい。そこからこのコードをスキャンすれば、作業は完了です！</p>
+									</li>
+									<li>
+										<!-- <span class="icon major style3 fa-copy" ></span>-->
+										<i class="icon major fa-tag"></i>
+										<h3>ペアリングコードを使用</h3>
+										<p>PC, Macから: <a id="pairinglink" href="byteball:A5X5LT9HtUewgC6Zob3oRfoICNj34d44ZCRYmXnDmqdZ@byteball.org/bb#LuckyBytes">こちら</a>をクリックするか、あるいは代わりに表示されるペアリングコードをウォレットに入力して下さい。
+                                        </p>
+									</li>
+								</ul>
+
+							</section>
+
+						<!-- Second Section -->
+						<section id="play" class="main">
+							<h1>オンラインで遊ぶ</h1>
+								<div class="spotlight">
+									<div class="content">
+										<ul class="actions">
+										</br>
+										<p>ゲームメニューから <strong>オンラインで遊ぶ</strong> を選択、または <strong>online</strong> と入力することで、<strong>ユーザーに優しい直感的な</strong>GUIでLuckyBytesをご利用いただけます。この時Byteballウォレットに接続せずとも、アカウントとのリンクさえあれば<strong>どのようなデバイスからでも</strong>遊ぶことが可能です。ただし、オンライン接続環境の安全性は維持するようにして下さい。
+										</p>
+										<img src="wallet1c.PNG" style="height: 400px; margin-top: -2em; box-shadow: 0px 0px 5px 0px gray;" alt="" />
+										<p>自身と他プレイヤーの進行状況を<strong>レスポンシブ</strong>なインターフェースで確認することが出来ます。オンラインの場合には、通知のオンオフなどのアカウント設定も変更可能です。
+                                        </p>
+										<img src="online1c.PNG" style="height: 400px; margin-top: -2em; box-shadow: 0px 0px 5px 0px gray;" alt="" />
+										<img src="online2c.PNG" style="height: 400px; margin-top: -2em; box-shadow: 0px 0px 5px 0px gray;" alt="" />
+										</ul>
+									</div>
+
+									<!--<span class="image"><img src="images/pic01.jpg" alt="" /></span>-->
+								</div>
+
+							</section>
+
+							<section id="help" class="main special" style="text-align: left;">
+								<h2>ヘルプ</h2>
+								<p>基本的にLuckyBytesはメニューの青文字部分を選択するだけで遊ぶことが出来ますが、こちらのコマンドもご利用いただけます。
+								<ul class="features" >
+								<dl class="alt" style="margin-right:20px;">
+								<dt>menu</dt>
+								<dd>ゲームメニューを開く。</dd>
+								<dt>settings</dt>
+								<dd>通知のオンオフや自動参加の設定を行う。</dd>
+								<dt>name</dt>
+								<dd>ユーザー名を変更する。</dd>
+							</dl>
+
+								<dl class="alt">
+								<dt>online</dt>
+								<dd>オンラインで遊ぶ。</dd>
+								<dt>history</dt>
+								<dd>個人あるいは全体のゲーム履歴を参照する。</dd>
+								<dt>tickets</dt>
+								<dd>チケットショップを開く。</dd>
+
+							</dl>
+								</ul>
+
+								<h2>よくある質問</h2>
+								<strong><dt>どのように開始すれば良いのですか？</dt></strong>
+								<dd>LuckyBytesと繋ぎ合わせた後に、チャットボックスに <strong>menu</strong> と入力することでメニューが開きます。</dd>
+								<br/>
+								<strong><dt>どのように遊べば良いのですか？</dt></strong>
+								<dd>遊ぶ前に<strong>チケットショップ</strong>にて1, 10, 100単位でパッケージされているチケットを購入することでゲームへと参加することが出来ます。この時1つのゲームに対して複数スロット参加することで勝率を引き上げるという遊び方も可能です！</dd>
+								<br/>
+								<strong><dt>他プレイヤーとのチャットはどのように行なえますか？</dt></strong>
+								<dd>他プレイヤーに宛てる場合には、文章の前にドット(<strong>.</strong>)を打って下さい。</br>例: <strong>.やあ、みんな！</strong></dd>
+								<br/>
+								<strong><dt>勝ったのですが、どうすれば良いですか？</dt></strong>
+								<dd>ゲームに勝った場合賞金は<strong>自動的に</strong>出金用アドレスへと支払われるため、特に何かを行う必要はありません。</dd>
+								<br/>
+								<strong><dt>出金用アドレスを変更することは出来ますか？</dt></strong>
+								<dd>はい、いつでも可能です！チャットボックスに新規アドレスを入力するだけで変更されます。</dd>
+								<br/>
+								<strong><dt>チャットやゲーム結果に関する通知を切ることは出来ますか？</dt></strong>
+								<dd><strong>設定</strong>から変更可能です。より直感的なオンラインアカウントからでも同様の変更が行えます。</dd>
+								<br/>
+								<strong><dt>チケットは無料で手に入らないのでしょうか？</dt></strong>
+								<dd>可能です！将来的には様々なオプションを検討しているのですが、現状では<strong>紹介プログラム</strong>によってのみ入手することが出来ます。あなたの紹介でLuckyBytesを使い始めたプレイヤーがチケットを100枚購入する毎に、無料チケット1枚が得られます。プログラムはゲームメニュー内の<strong>フリーチケット</strong>項目からご利用可能です。</dd>
+								<br/>
+
+
+
+
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>規約</h2>
+							<p>
+                                このチャットボットはすべての不具合を「現状有姿 (as is)」で提供しており、LuckyBytesはこのチャットボットやこのチャットボットに付随する資料やサービスに関するいかなる事項に対しても表明や保証は行いません。LuckyBytes、その作者、開発者、及び従業員のいずれも、このチャットボットの使用に起因または関連する事項に対し、契約書における責任の記載如何に関わらず、一切の責任を負うことはありません。作者、開発者、及び従業員を含むLuckyBytesは、このチャットボットの使用に起因または関連する直接的、間接的、派生的、または特別な責任を一切負いません。上記には、ソフトウェアやハードウェアの障害、悪意のある攻撃、接続、プロトコル、ウォレットの障害など、あらゆる種類の資金損失が含まれます。<strong>未成年者または18歳未満の方は、このチャットボットを使用することは出来ません。</strong>適用される法律の下で本利用規約の内いずれかの条項が無効であると判明した場合、その条項は本規約の残りの条項に影響を与えること無く削除されます。以上の条件に同意しない場合は、このチャットボットを使用してはなりません。
+                            </p>
+                            <h2>Terms</h2>
+                            <p>
+                                This chat bot is provided “as is,” with all faults, and LuckyBytes express no representations or warranties of any kind related to this chat bot or the materials and services provided with this chat bot. In no event shall LuckyBytes, nor any of its authors, developers and employees, be held liable for anything arising out of or in any way connected with your use of this chat bot whether or not such liability is under contract. LuckyBytes, including its authors, developers and employees shall not be held liable for any direct, indirect, consequential or special liability arising out of or in any way related to your use of this chat bot. This also includes loss of funds of any kind, including software or hardware failures, malicious attacks, connection, protocol or wallet failures. <strong>Minors or people below 18 years old are not allowed to use this chat bot. </strong>If any provision of these Terms is found to be invalid under any applicable law, such provisions shall be deleted without affecting the remaining provisions herein. If you disagree with these terms you must not use this chat bot.
+                            </p>
+						</section>
+						<section>
+							<h2>コンタクト</h2>
+							<dl class="alt">
+								<dt>Slack:</dt>
+								<dd>https://byteball.slack.com</dd>
+								<dt>User:</dt>
+								<dd>#pxrunes</dd>
+							</dl>
+
+						</section>
+						<p class="copyright">&copy; LuckyBytes. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src="./superagent.js"></script>
+
+  <script>
+    window.onload = function () {
+	document.getElementById("weekly_jackpot").style.display = "none";
+	getgames();
+	getstatistics();
+	setInterval(function () {
+		getgames();
+		getstatistics();
+	}, 30000);
+
+	if (getParams("p")) {
+		var pairing=getParams("p");
+		//
+		document.getElementById("pairinglink").href = 'byteball:A5X5LT9HtUewgC6Zob3oRfoICNj34d44ZCRYmXnDmqdZ@byteball.org/bb#LuckyBytesR'+pairing;
+		document.getElementById("pairingqr").src = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=byteball%3AA5X5LT9HtUewgC6Zob3oRfoICNj34d44ZCRYmXnDmqdZ%40byteball.org%2Fbb%23LuckyBytesR'+pairing;
+		//
+		}
+}
+
+function getParams(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)")
+  var results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+	function gametable(data) {
+		// Create Game History Table
+		var tableBody = document.getElementById("gamehistory");
+		var tableBodyJackpot = document.getElementById("jackpothistory");
+		tableBody.innerHTML = "";
+		tableBodyJackpot.innerHTML = "";
+		for (var i = 0; i < data.history.length; i++) {
+			var gamename = '';
+			var game = data.history[i].game;
+			var type = data.history[i].type;
+			var win = data.history[i].winning_slot;
+			var proof = data.history[i].proof;
+			var jackpotproof ='';
+			var price = data.history[i].prize + " MB";
+			if (type === '4') { gamename = 'luckybaud'; }
+			else if (type === '8') { gamename = 'luckybyte'; }
+			else if (type === '32') { gamename = 'luckyint'; }
+			else if (type === '7') { gamename = 'Weekly Jackpot'; jackpotproof = '&number=' + data.history[i].slots.length;}
+			gamename = gamename + '(' + game.slice(0, 4) + '...)';
+			var players = [];
+			for (var j = 0; j < data.history[i].slots.length; j++) {
+				if (j === (win - 1)) {
+					players.push(data.history[i].slots[j].name + ' (<i class="icon style6 fa-star"></i>)');
+				} else {
+					players.push(data.history[i].slots[j].name);
+				}
+			}
+			if (type === '7') { //Jackpot Games
+			tableBodyJackpot.innerHTML += "<tr><td>" + gamename + "</td><td>Winner: "+data.history[i].slots[win-1].name+"&emsp;Prize: "+price+"&emsp;Tickets sold: " + players.length + "</td><td><a href='./proof.html?proofid="+proof+jackpotproof+"'>" + proof.slice(0, 6) + '...' + "</a></td></tr>"
+			} else { // Normal Games
+			tableBody.innerHTML += "<tr><td>" + gamename + "</td><td>" + players.join(', ') + "</td><td><a href='./proof.html?proofid="+proof+"'>" + proof.slice(0, 6) + '...' + "</a></td></tr>"
+			}
+		}
+		// Update active games
+		for (var i = 0; i < data.active.length; i++) {
+			var game = data.active[i].game;
+			var type = data.active[i].type;
+			var slots = data.active[i].slots;
+
+			if (data.active[i].status==="time") {
+				document.getElementById("weekly_jackpot").style.display = "block";
+				document.getElementById("days").textContent = data.active[i].days;
+				document.getElementById("hours").textContent = data.active[i].hours;
+				document.getElementById("minutes").textContent = data.active[i].minutes;
+				document.getElementById("jackpot").textContent = data.active[i].prize;
+				document.getElementById("jackpottickets").textContent = slots.length;
+			} else {
+				document.getElementById("game" + type).textContent = '(' + game.slice(0, 4) + '...)';
+				document.getElementById("slots" + type).textContent = slots.length;
+			}
+		}
+	}
+
+	function getgames() {
+		superagent.get('./account/games', function (err, res) {
+			if (err) {
+				console.log(err)
+				return
+			}
+			var data = JSON.parse(res.text);
+			gametable(data);
+		})
+	}
+
+		function getstatistics() {
+		superagent.get('./statistics', function (err, res) {
+			if (err) {
+				console.log(err)
+				return
+			}
+			var data = JSON.parse(res.text);
+			if (data.total_games) {
+			document.getElementById("total4").textContent = data.total_games.total_4;
+			document.getElementById("total8").textContent = data.total_games.total_8;
+			document.getElementById("total32").textContent = data.total_games.total_32;
+			}
+		})
+	}
+
+  </script>
+
+
+
+	</body>
+</html>
