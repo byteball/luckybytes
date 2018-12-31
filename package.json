@@ -3,7 +3,7 @@
   "description": "LuckyBytes",
   "author": "pxrunes",
   "version": "0.1.7",
-  "main": "start.js",
+  "main": "lucky.js",
   "scripts": {
     "start": "node --use_strict start.js &"
   },
