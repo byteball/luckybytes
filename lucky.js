@@ -88,12 +88,12 @@ var options = {
 
 var app = express();
 
-var server = https.createServer(options, app).listen(conf.webPort, function () {
-	console.log("Express server listening on port " + conf.webPort);
+var server = https.createServer(options, app).listen(conf.sslWebPort, function () {
+	console.log("Express server listening on port " + conf.sslWebPort);
 });
 
 var app = express();
-app.listen(3000)
+app.listen(conf.webPort);
 
 
 app.all('/*', function (req, res) {

@@ -21,7 +21,8 @@ exports.KEYS_FILENAME = 'keys.json';
 // where logs are written to (absolute path).  Default is log.txt in app data directory
 //exports.LOG_FILENAME = '/dev/null';
 
-exports.webPort = 7777;
+exports.webPort = 7007;
+exports.sslWebPort = 7777;
 exports.sslPath = '/etc/letsencrypt/live/lucky.byte-ball.com/';
 
 console.log('finished luckybytes config.');
