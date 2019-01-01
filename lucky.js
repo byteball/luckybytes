@@ -841,11 +841,11 @@ function readKeys(onDone) {
 		console.log("payouts allowed to address: " + conf.payout_address);
 	console.log('----------------------');
 	fs.readFile(KEYS_FILENAME, 'utf8', function (err, data) {
-		var rl = readline.createInterface({
+	/*	var rl = readline.createInterface({
 			input: process.stdin,
 			output: process.stdout,
 			//terminal: true
-		});
+		});*/
 		if (err) { // first start
 			console.log('failed to read keys, will gen');
 
