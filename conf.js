@@ -5,6 +5,7 @@
 //exports.myUrl = 'wss://mydomain.com/bb';
 exports.bServeAsHub = false;
 exports.bLight = true;
+exports.bIgnoreUnpairRequests = true;
 
 
 exports.storage = 'sqlite';
