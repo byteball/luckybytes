@@ -3,18 +3,18 @@
 var fs = require('fs');
 var crypto = require('crypto');
 var util = require('util');
-var constants = require('byteballcore/constants.js');
-var conf = require('byteballcore/conf.js');
-var objectHash = require('byteballcore/object_hash.js');
-var desktopApp = require('byteballcore/desktop_app.js');
-var db = require('byteballcore/db.js');
-var eventBus = require('byteballcore/event_bus.js');
-var ecdsaSig = require('byteballcore/signature.js');
+var constants = require('ocore/constants.js');
+var conf = require('ocore/conf.js');
+var objectHash = require('ocore/object_hash.js');
+var desktopApp = require('ocore/desktop_app.js');
+var db = require('ocore/db.js');
+var eventBus = require('ocore/event_bus.js');
+var ecdsaSig = require('ocore/signature.js');
 var Mnemonic = require('bitcore-mnemonic');
 var Bitcore = require('bitcore-lib');
 var readline = require('readline');
-var val = require('byteballcore/validation_utils.js');
-var net = require('byteballcore/network.js');
+var val = require('ocore/validation_utils.js');
+var net = require('ocore/network.js');
 
 
 var appDataDir = desktopApp.getAppDataDir();
@@ -242,7 +242,7 @@ app.all('/*', function (req, res) {
 
 
 function sendtexttodevice(text_name, device_id, params=[]) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	// callback function 
 	function send(lan) {
 		if (lan === 'japanese') {
@@ -659,7 +659,7 @@ function updategames() {
 }
 
 function checksinglereferralbonus(user_device,last=false) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	// check when was the lastcheck and get the date
 	db.query("select * from User_Referrals_Bonus where device=?",[user_device],function(rows){
@@ -762,7 +762,7 @@ function checkreferraltickets(refarray,callback){
 }
 
 function handlerefpair(data) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	
 	var referral = data.split('LuckyBytesR').pop().split('"').shift();
 	var device_id = data.split('"from":"').pop().split('"').shift();
@@ -917,10 +917,10 @@ function writeKeys(mnemonic_phrase, deviceTempPrivKey, devicePrevTempPrivKey, on
 
 function createWallet(xPrivKey, onDone) {
 	var devicePrivKey = xPrivKey.derive("m/1'").privateKey.bn.toBuffer({ size: 32 });
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	device.setDevicePrivateKey(devicePrivKey); // we need device address before creating a wallet
 	var strXPubKey = Bitcore.HDPublicKey(xPrivKey.derive("m/44'/0'/0'")).toString();
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 	walletDefinedByKeys.createWalletByDevices(strXPubKey, 0, 1, [], 'any walletName', false, function (wallet_id) {
 		walletDefinedByKeys.issueNextAddress(wallet_id, 0, function (addressInfo) {
 			onDone();
@@ -943,7 +943,7 @@ function readSingleAddress(handleAddress) {
 }
 
 function prepareBalanceText(handleBalanceText) {
-	var Wallet = require('byteballcore/wallet.js');
+	var Wallet = require('ocore/wallet.js');
 	Wallet.readBalance(wallet_id, function (assocBalances) {
 		var arrLines = [];
 		for (var asset in assocBalances) {
@@ -960,7 +960,7 @@ function prepareBalanceText(handleBalanceText) {
 }
 
 function prepareSharedBalanceText(handleBalanceText) {
-	var Wallet = require('byteballcore/wallet.js');
+	var Wallet = require('ocore/wallet.js');
 	Wallet.readSharedBalance(wallet_id, function (assocBalances) {
 		var arrLines = [];
 		// assocBalances[asset][row.address][row.is_stable ? 'stable' : 'pending'] += row.balance;  
@@ -982,7 +982,7 @@ function prepareSharedBalanceText(handleBalanceText) {
 }
 
 function sendtexttosharedaddress(shared_address, text) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	db.query('SELECT * FROM shared_address_signing_paths WHERE signing_path="r.1.0" AND shared_address= ?', [shared_address], function (rows2) {
 		if (rows2.length === 1) {
@@ -992,7 +992,7 @@ function sendtexttosharedaddress(shared_address, text) {
 }
 
 function sendtexttodepositdaddress(address, text, params=[]) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	db.query('SELECT * FROM User_Account WHERE deposit_address= ?', [address], function (rows2) {
 		if (rows2.length === 1) {
@@ -1003,10 +1003,10 @@ function sendtexttodepositdaddress(address, text, params=[]) {
 }
 
 function resend(mydevice, asset, unit, to_address) {
-	var indivisible_asset = require('byteballcore/indivisible_asset');
-	var wallet_defined_by_keys = require('byteballcore/wallet_defined_by_keys');
-	var walletDefinedByAddresses = require('byteballcore/wallet_defined_by_addresses');
-	var device = require('byteballcore/device.js');
+	var indivisible_asset = require('ocore/indivisible_asset');
+	var wallet_defined_by_keys = require('ocore/wallet_defined_by_keys');
+	var walletDefinedByAddresses = require('ocore/wallet_defined_by_addresses');
+	var device = require('ocore/device.js');
 
 	function success() {
 		device.sendMessageToDevice(mydevice, 'text', "Resend it.");
@@ -1020,7 +1020,7 @@ function resend(mydevice, asset, unit, to_address) {
 }
 
 function cashoutsharedaddress(shared_address, from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	// Find Shared Address
 	db.query('SELECT * FROM My_Contracts WHERE Shared_Address  = ?', [shared_address], function (rows) {
 		if (rows.length === 1) {
@@ -1070,13 +1070,13 @@ function signWithLocalPrivateKey(wallet_id, account, is_change, address_index, t
 
 
 function handlePairing(from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	sendtexttodevice("welcometext",from_address);
 }
 
 function sendPayment(asset, amount, to_address, change_address, device_address, onDone) {
-	var device = require('byteballcore/device.js');
-	var Wallet = require('byteballcore/wallet.js');
+	var device = require('ocore/device.js');
+	var Wallet = require('ocore/wallet.js');
 	Wallet.sendPaymentFromWallet(
 		asset, wallet_id, to_address, amount, change_address,
 		[], device_address,
@@ -1093,8 +1093,8 @@ function sendPayment(asset, amount, to_address, change_address, device_address, 
 }
 
 function sendSharedPaymentFromAddress(asset, amount, to_address, change_address, device_address, shared_address, onDone) {
-	var device = require('byteballcore/device.js');
-	var Wallet = require('byteballcore/wallet.js');
+	var device = require('ocore/device.js');
+	var Wallet = require('ocore/wallet.js');
 
 	db.query(
 		"SELECT shared_address FROM shared_addresses", function (rows) {
@@ -1135,8 +1135,8 @@ function sendSharedPaymentFromAddress(asset, amount, to_address, change_address,
 }
 
 function sendSharedPayment(asset, amount, to_address, change_address, device_address, onDone) {
-	var device = require('byteballcore/device.js');
-	var Wallet = require('byteballcore/wallet.js');
+	var device = require('ocore/device.js');
+	var Wallet = require('ocore/wallet.js');
 
 	db.query(
 		"SELECT shared_address FROM shared_addresses", function (rows) {
@@ -1183,7 +1183,7 @@ function sendSharedPayment(asset, amount, to_address, change_address, device_add
 }
 
 function issueChangeAddressAndSendPayment(asset, amount, to_address, device_address, onDone) {
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 	var change = CHANGE_ADDRESSES[change_index];
 	change_index++;
 	if (change_index === CHANGE_ADDRESSES.length) { change_index = 0; }
@@ -1192,7 +1192,7 @@ function issueChangeAddressAndSendPayment(asset, amount, to_address, device_addr
 }
 
 function issueChangeAddressAndSendSharedPayment(asset, amount, to_address, device_address, onDone) {
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 
 	var change = CHANGE_ADDRESSES[change_index];
 	change_index++;
@@ -1202,7 +1202,7 @@ function issueChangeAddressAndSendSharedPayment(asset, amount, to_address, devic
 
 function issueChangeAddressAndSendSharedPaymentFromAddress(asset, amount, to_address, device_address, shared_address, onDone) {
 
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 	var change = CHANGE_ADDRESSES[change_index];
 	change_index++;
 	if (change_index === CHANGE_ADDRESSES.length) { change_index = 0; }
@@ -1211,14 +1211,14 @@ function issueChangeAddressAndSendSharedPaymentFromAddress(asset, amount, to_add
 }
 
 function issueOrSelectNextMainAddress(handleAddress) {
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 	walletDefinedByKeys.issueOrSelectNextAddress(wallet_id, 0, function (objAddr) {
 		handleAddress(objAddr.address);
 	});
 }
 
 function sendstatusfromuser(from_address, text) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	device.readCorrespondent(from_address, function handleCorrespondent(Correspondent) {
 		var cname = Correspondent.name || 'unkown user';
 		cname = cname.replace(/[^a-z0-9]/gi, '');
@@ -1237,7 +1237,7 @@ function sendstatusfromuser(from_address, text) {
 }
 
 function sendstatusfromusername(from_address, text, username) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	var cname = username || 'unkown user';
 	cname = cname.replace(/[^a-z0-9]/gi, '');
@@ -1267,7 +1267,7 @@ function sendstatusfromusername(from_address, text, username) {
 }
 
 function sendann(text) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	db.query("SELECT device_address FROM correspondent_devices where not device_address =?",[transitionbot], function (rows) {
 		if (rows.length > 0) {
@@ -1287,7 +1287,7 @@ function setstatus(text) {
 function globalchat(from_address, text) {
  
 
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	// check if the user is banned
 	db.query("select setting1 from Device_Settings WHERE device =?", [from_address], function (rows4) {
@@ -1352,7 +1352,7 @@ function analyzePayParams(amountText, assetText, cb) {
 }
 
 function checkusername(from_address, text) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	device.readCorrespondent(from_address, function handleCorrespondent(Correspondent) {
 
 		  if (Correspondent.name === 'undefined') {
@@ -1369,7 +1369,7 @@ function changename(from_address, text) {
 	var newname = text.substring(6, 25)
 	//var newname = newname.replace(/[^a-z0-9]/gi, '');
 	newname = newname.replace(/[&\/\\#,+()$~%.'":*?"!<>=´`{}]/g, '');
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	if ((newname.length) < 3) {
 		//device.sendMessageToDevice(from_address, 'text', setname);
@@ -1433,7 +1433,7 @@ function createmyowntables() {
 }
 
 function menu(from_address) {
-	var device2 = require('byteballcore/device.js');
+	var device2 = require('ocore/device.js');
 	db.query("SELECT * FROM User_Account t1 LEFT JOIN User_Language AS t2 on t1.device = t2.device WHERE t1.device=?", [from_address], function (rows) {
 		if (rows.length === 1) {
 			var lan = rows[0].language || "english";
@@ -1518,7 +1518,7 @@ function menu(from_address) {
 }
 
 function listchat(from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	// User Count
 
@@ -1555,7 +1555,7 @@ function listchat(from_address) {
 
 
 function linkmyaddresses(from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	var CoinKey = require('coinkey');
 	device.sendMessageToDevice(from_address, 'text', 'starting to link my addresses...');
 	db.query("select * from my_addresses",function (rows) {
@@ -1605,7 +1605,7 @@ function linkmyaddresses(from_address) {
 }
 
 function invitation(hub_host, device_pubkey, pairing_secret, cb){
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	//return setTimeout(cb, 5000);
 	if (device_pubkey === device.getMyDevicePubKey())
 		return cb("cannot pair with myself");
@@ -1623,7 +1623,7 @@ function invitation(hub_host, device_pubkey, pairing_secret, cb){
 };
 
 function checksinglejackpot(from_address, game, type, time, slots, proofhash) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	//check if all slots are filled
 	//if so change status to "payout" and inform the lucky winner!
 	var currentTime = new Date();
@@ -1659,7 +1659,7 @@ function checksinglejackpot(from_address, game, type, time, slots, proofhash) {
 }
 
 function checksinglegame(from_address, game, type, win, slots, proofhash) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	//check if all slots are filled
 	//if so change status to "payout" and inform the lucky winner!
 
@@ -1688,7 +1688,7 @@ function checksinglegame(from_address, game, type, win, slots, proofhash) {
 }
 
 function payoutgame(from_address, game, type, win, slots, proofhash, lastround = false) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	var jackpot = false;
 
 	if (!start) { locksending = false; return 0; }
@@ -1764,7 +1764,7 @@ function payoutgame(from_address, game, type, win, slots, proofhash, lastround =
 }
 
 function joinjackpot(from_address, type, user_name, callback, autojoin = false) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	console.log('MyLog: joining a jackpot game... ');
 	var enter = false;
@@ -1828,7 +1828,7 @@ function joinjackpot(from_address, type, user_name, callback, autojoin = false) 
 }
 
 function joingame(from_address, type, user_name, callback, autojoin = false) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	console.log('MyLog: joining a game... ');
 	var enter = false;
@@ -1896,7 +1896,7 @@ function joingame(from_address, type, user_name, callback, autojoin = false) {
 }
 
 function createnewgame(from_address, type) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	var engine = Provable({
 		count: 4
 	})
@@ -1939,7 +1939,7 @@ function createnewgame(from_address, type) {
 }
 
 function createnewtimegame(from_address, days) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	var engine = Provable({
 		count: 4
 	})
@@ -1968,7 +1968,7 @@ function createnewtimegame(from_address, days) {
 }
 
 function add_autoplaypoint(device_id) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	// Read Points
 	// If X+1 >= 25 , give a ticket
 	// User_Autoplay: device, points, tickets_total
@@ -2035,7 +2035,7 @@ function get_userxp(user_device, callback) {
 }
 
 function managegames(from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	// Is there one active game of each type? Else create one!
 	// Check every game
 	// Games: game, proofhash, win_4, win_8, win_32, win_256, slots TEXT, status, time TIMESTAMP, extra
@@ -2115,7 +2115,7 @@ function managegames(from_address) {
 }
 
 function managepayouts(from_address) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	
 
 	if (!start) { return 0; }
@@ -2177,7 +2177,7 @@ function managepayouts(from_address) {
 }
 
 function checksingleticket(from_address, user_device, address, date) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	// For each user account check for new stable payments
 	//console.log('MyLog: checking address: ' + address + ' of Device: ' + user_device);
 	if (address === '') {return 0;}
@@ -2226,7 +2226,7 @@ function checksingleticket(from_address, user_device, address, date) {
 
 function checktickets(admin_address) {
 
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 	db.query("Select * from User_Account", function (rows) {
 		var user_device = "0";
 		var address = "0";
@@ -2263,7 +2263,7 @@ function checkrefbonus(from_address) {
 }
 
 function checktransaction(admin_address, unit) {
-	var device = require('byteballcore/device.js');
+	var device = require('ocore/device.js');
 
 	 db.query("Select *, sum(t1.amount)/1000000 as total from Outputs t1 Where t1.unit=? And exists (select * from User_Account t2 where t1.address = t2.deposit_address) Group by address", [unit], function (rows) {
 		for (var i = 0; i < rows.length; i++) {
@@ -2292,7 +2292,7 @@ function setupChatEventHandlers() {
 
 	eventBus.on('new_my_transactions', function (arrUnits) {
 		// react to receipt of payment(s)
-		var device = require('byteballcore/device.js');
+		var device = require('ocore/device.js');
  
 		for (var i = 0; i < arrUnits.length; i++) {
 			checktransaction(conf.control_addresses[0], arrUnits[i]);
@@ -2302,7 +2302,7 @@ function setupChatEventHandlers() {
 
 
 	eventBus.on('text', function (from_address, text) {
-		var device = require('byteballcore/device.js');
+		var device = require('ocore/device.js');
 
 		console.log('MyLog:text from ' + from_address + ': ' + text);
 
@@ -2423,7 +2423,7 @@ setTimeout(function () {
 		readSingleWallet(function (wallet) {
 			// global
 			wallet_id = wallet;
-			var device = require('byteballcore/device.js');
+			var device = require('ocore/device.js');
 			device.setDevicePrivateKey(devicePrivKey);
 			let my_device_address = device.getMyDeviceAddress();
 			db.query("SELECT 1 FROM extended_pubkeys WHERE device_address=?", [my_device_address], function (rows) {
@@ -2434,7 +2434,7 @@ setTimeout(function () {
 						console.log('MyLog:passphrase is incorrect');
 						process.exit(0);
 					}, 1000);
-				require('byteballcore/wallet.js'); // we don't need any of its functions but it listens for hub/* messages 
+				require('ocore/wallet.js'); // we don't need any of its functions but it listens for hub/* messages 
 				device.setTempKeys(deviceTempPrivKey, devicePrevTempPrivKey, saveTempKeys);
 				device.setDeviceName(conf.deviceName);
 				device.setDeviceHub(conf.hub);
@@ -2444,7 +2444,7 @@ setTimeout(function () {
 				if (conf.permanent_paring_secret)
 					console.log("====== my pairing code: " + my_device_pubkey + "@" + conf.hub + "#" + conf.permanent_paring_secret);
 				if (conf.bLight) {
-					var light_wallet = require('byteballcore/light_wallet.js');
+					var light_wallet = require('ocore/light_wallet.js');
 					light_wallet.setLightVendorHost(conf.hub);
 					//console.log("====== archiving double spend units.... ====== ");
 					//light_wallet.archiveDoublespendUnits(); <== regularly done now in wallet code
@@ -2487,7 +2487,7 @@ setInterval(function () {
 }, 120000);
 
 setInterval(function () {
-	var light_wallet = require('byteballcore/light_wallet.js');
+	var light_wallet = require('ocore/light_wallet.js');
 	light_wallet.refreshLightClientHistory();
 }, 600000);
 
@@ -2506,8 +2506,8 @@ setInterval(function () {
 
 function handlecommand(from_address, text) {
 
-	var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
-	var device = require('byteballcore/device.js');
+	var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
+	var device = require('ocore/device.js');
 	text = text.trim();
 	var fields = text.split(/ /);
 	var command = fields[0].trim().toLowerCase();
@@ -2898,7 +2898,7 @@ function handlecommand(from_address, text) {
 				var deposit = rows[0].deposit_address;
 				if (!val.isValidAddress(deposit)) {
 					// Create a new Address for the user
-					var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+					var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 					walletDefinedByKeys.issueNextAddress(wallet_id, 0, function (objAddress) {
 						deposit = objAddress.address;
 						db.query("REPLACE INTO User_Account (device, name, deposit_address, withdraw_address, tickets, lastcheck, hashkey) VALUES (?,(SELECT name FROM User_Account WHERE device = ?),?,(SELECT withdraw_address FROM User_Account WHERE device = ?),(SELECT tickets FROM User_Account WHERE device = ?),(SELECT lastcheck FROM User_Account WHERE device = ?),(SELECT hashkey FROM User_Account WHERE device = ?))", [from_address, from_address, deposit, from_address, from_address, from_address, from_address], function () {
@@ -2933,7 +2933,7 @@ function handlecommand(from_address, text) {
 				var deposit = rows[0].deposit_address;
 				if (!val.isValidAddress(deposit)) {
 					// Create a new Address for the user
-					var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+					var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 					walletDefinedByKeys.issueNextAddress(wallet_id, 0, function (objAddress) {
 						deposit = objAddress.address;
 						db.query("REPLACE INTO User_Account (device, name, deposit_address, withdraw_address, tickets, lastcheck, hashkey) VALUES (?,(SELECT name FROM User_Account WHERE device = ?),?,(SELECT withdraw_address FROM User_Account WHERE device = ?),(SELECT tickets FROM User_Account WHERE device = ?),(SELECT lastcheck FROM User_Account WHERE device = ?),(SELECT hashkey FROM User_Account WHERE device = ?))", [from_address, from_address, deposit, from_address, from_address, from_address, from_address], function () {
@@ -2968,7 +2968,7 @@ function handlecommand(from_address, text) {
 				var deposit = rows[0].deposit_address;
 				if (!val.isValidAddress(deposit)) {
 					// Create a new Address for the user
-					var walletDefinedByKeys = require('byteballcore/wallet_defined_by_keys.js');
+					var walletDefinedByKeys = require('ocore/wallet_defined_by_keys.js');
 					walletDefinedByKeys.issueNextAddress(wallet_id, 0, function (objAddress) {
 						deposit = objAddress.address;
 						db.query("REPLACE INTO User_Account (device, name, deposit_address, withdraw_address, tickets, lastcheck, hashkey) VALUES (?,(SELECT name FROM User_Account WHERE device = ?),?,(SELECT withdraw_address FROM User_Account WHERE device = ?),(SELECT tickets FROM User_Account WHERE device = ?),(SELECT lastcheck FROM User_Account WHERE device = ?),(SELECT hashkey FROM User_Account WHERE device = ?))", [from_address, from_address, deposit, from_address, from_address, from_address, from_address], function () {
