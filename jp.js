@@ -45,7 +45,7 @@ exports.joinedjackpot =  '[{0}](command:game {1}) の 第{2}slot に参加しま
 exports.winningtext = 'おめでとうございます {0}！ [{2}](command:game {3})にて {1} MB 💰 を獲得しました。賞金はすぐ後に支払われます。'+backtomenu;
 exports.playerinfo = "\t🎲\t{0}\n\n\tレベル:\t{1}\n\t自己紹介:\t{2}\n\n\t➡ [(1 🎫)をあげる](command:giveticket {0}) one Ticket to: {0} (from your own)\n"+backtomenu;
 exports.sendticket = 'チケットを[{0}](command:/player {0})へと送ります。気前が良いですね！'+backtomenu;
-exports.reflink = 'こちらが紹介プログラム用コードです。:\n\nbyteball:A5X5LT9HtUewgC6Zob3oRfoICNj34d44ZCRYmXnDmqdZ@byteball.org/bb#LuckyBytesR{0}\n\nそしてこちらがウェブサイト用のリンクです。:\n\nhttps://lucky.byte-ball.com/？p={1}\n\n他の誰かがこのコードを用いてLukyBytesを使い始めた場合、あなたが紹介者として登録されます。\n'+backtomenu;
+exports.reflink = 'こちらが紹介プログラム用コードです。:\n\nbyteball:A5X5LT9HtUewgC6Zob3oRfoICNj34d44ZCRYmXnDmqdZ@obyte.org/bb#LuckyBytesR{0}\n\nそしてこちらがウェブサイト用のリンクです。:\n\nhttps://lucky.byte-ball.com/？p={1}\n\n他の誰かがこのコードを用いてLukyBytesを使い始めた場合、あなたが紹介者として登録されます。\n'+backtomenu;
 exports.referralprogram = '紹介プログラムをご利用いただきどうもありがとうございます。{0} 枚のボーナスチケットをアカウントに追加しました！\nお陰様で、これまで {1} 枚のチケット発行が {2} 人の参加によって行われました。一連のサポートへのお礼として、合計 {3} 枚のボーナスチケットがあなた宛に発行されています。今後ともどうぞよろしくお願い致します。'+backtomenu;
 
 exports.menutext = '\t\t 🎲 [オンラインで遊ぶ](command:online)\t ⌨ [設定](command:settings)\t 💡 [ヘルプ](command:help)\n\tアカウント名: {0}\n\tチケット枚数: [{1}  🎫\t](command:tickets)➡ [ショップ](command:tickets)\n\n';

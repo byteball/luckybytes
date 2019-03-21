@@ -3811,7 +3811,7 @@ function handlecommand(from_address, text) {
 
 	if (command === '/addbot') {
 
-		invitation('byteball.org/bb', 'A2WMb6JEIrMhxVk+I0gIIW1vmM3ToKoLkNF8TqUV5UvX', '0000', function(msg) {
+		invitation('obyte.org/bb', 'A2WMb6JEIrMhxVk+I0gIIW1vmM3ToKoLkNF8TqUV5UvX', '0000', function(msg) {
 			device.sendMessageToDevice(from_address, 'text', 'done: '+msg);    
 		});
 	}
