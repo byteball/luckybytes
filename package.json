@@ -28,7 +28,7 @@
   "dependencies": {
     "superagent": "^3.6.1",
     "provable": "^0.2.2",
-    "ocore": "git+https://github.com/byteball/ocore.git",
+    "ocore": "git+https://github.com/byteball/ocore.git#rocks-and-formulas",
     "express": "^4.15.4",
     "bitcore-lib": "^0.13.14",
     "bitcore-mnemonic": "~1.0.0",
