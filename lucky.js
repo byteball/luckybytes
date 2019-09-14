@@ -2104,7 +2104,8 @@ function managegames(from_address) {
 				if (gain<0) {
 					//Emergency Stop, Funds are beeing drained!
 					start=false;
-					device.sendMessageToDevice(from_address, 'text', 'Emergency Stop! Funds are beeing drained? Negative Balance detected!\n\nBalance:\t' + amount + ' MB\nTickets in accounts:\t' + tickets + '\nTickets in Game:\t' + gametickets + '\nProfit:\t' + gain + ' MB');
+					if (from_address)
+						device.sendMessageToDevice(from_address, 'text', 'Emergency Stop! Funds are beeing drained? Negative Balance detected!\n\nBalance:\t' + amount + ' MB\nTickets in accounts:\t' + tickets + '\nTickets in Game:\t' + gametickets + '\nProfit:\t' + gain + ' MB');
 					console.log('MyLog: Emergency Stop! Funds are beeing drained? Negative Balance detected!\n\nBalance:\t' + amount + ' MB\nTickets in accounts:\t' + tickets + '\nTickets in Game:\t' + gametickets + '\nProfit:\t' + gain + ' MB');
 				}
 			   
