@@ -35,5 +35,8 @@
     "json-rpc2": "^1.0.2",
     "bitcore-message": "^1.0.4",
     "coinkey": "^2.0.0"
-  }
+  },
+	"resolutions": {
+		"level-rocksdb": "^4.0.0"
+	}
 }
