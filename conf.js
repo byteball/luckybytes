@@ -6,6 +6,7 @@
 exports.bServeAsHub = false;
 exports.bLight = true;
 exports.bIgnoreUnpairRequests = true;
+exports.bIgnoreMissingCorrespondents = true;
 
 
 exports.storage = 'sqlite';
